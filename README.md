@@ -68,7 +68,7 @@ Abra http://localhost:8000
 
 ---
 
-# 📁 Estrutura do projeto
+## 📁 Estrutura do projeto
 ```py
 projeto/
 ├── static/                 # Arquivos estáticos (HTML, CSS, JS, imagens)
@@ -86,11 +86,12 @@ projeto/
 
 ---
 
-# ⚠️ Observações
+## ⚠️ Observações
 - O projeto utiliza SQLite para facilitar a execução local sem necessidade de instalação extra de banco de dados.
 
 - Para efeitos de teste, cinco obras são automaticamente inseridas na primeira execução.
 
 ---
-# 📫 Contato
+
+## 📫 Contato
 📧 Feito por [Caio da Silva Freitas](mailto:caiodasilvafreitas005@gmail.com)
