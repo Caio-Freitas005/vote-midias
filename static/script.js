@@ -3,6 +3,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mediaContainer = document.getElementById('media-container');
 
+    function showErrorToast(message) {
+        const errorToastElement = document.getElementById('errorToast');
+        const errorToastBody = document.getElementById('errorToastBody');
+
+        const errorToast = new bootstrap.Toast(errorToastElement);
+
+        errorToastBody.textContent = message;
+
+        errorToast.show();
+    }
+
+    mediaContainer.addEventListener('click', (e) => {
+        const clickedButton = e.target.closest('.vote-btn');
+
+        if (!clickedButton) {
+            return;
+        }
+
+        e.preventDefault();
+
+        const mediaId = clickedButton.dataset.id;
+        const voteType = clickedButton.dataset.type;
+
+        handleVote(mediaId, voteType)
+    });
+
+    async function handleVote(mediaId, voteType) {
+        try {
+            const url = `http://localhost:8000/medias/${mediaId}/${voteType}`;
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            const response = await fetch(url, options);
+
+            if (!response.ok) {
+                throw new Error('Falha ao registrar o voto.');
+            }
+
+            const updatedMedia = await response.json();
+
+            // Atualiza os contadores na página
+            const likesCountSpan = document.getElementById(`likes-count-${mediaId}`);
+            const dislikesCountSpan = document.getElementById(`dislikes-count-${mediaId}`);
+
+            if (likesCountSpan && dislikesCountSpan) {
+                // Atualiza o HTML interno dos contadores com os novos valores
+                likesCountSpan.innerHTML = `<i class="bi bi-hand-thumbs-up-fill"></i> ${updatedMedia.likes}`;
+                dislikesCountSpan.innerHTML = `<i class="bi bi-hand-thumbs-down-fill"></i> ${updatedMedia.dislikes}`;
+            }
+
+        } catch (error) {
+            console.error(`Erro ao votar: ${error}`);
+            showErrorToast('Não foi possível registrar o seu voto. Tente novamente mais tarde.');
+        }
+    }
+
     async function loadMedias() {
         try {
             const response = await fetch('http://localhost:8000/medias');
@@ -39,15 +100,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="card-text small">${media.description}</p>
                             <div class="mt-auto pt-3">
                                 <p class="mb-2">
-                                    <span class="badge text-bg-success">
+                                    <span id="likes-count-${media.id}" class="badge text-bg-success fs-6">
                                         <i class="bi bi-hand-thumbs-up-fill"></i> ${media.likes}
                                     </span>
-                                    <span class="badge text-bg-danger ms-2">
+                                    <span id="dislikes-count-${media.id}" class="badge text-bg-danger ms-2 fs-6">
                                         <i class="bi bi-hand-thumbs-down-fill"></i> ${media.dislikes}
                                     </span>
                                 </p>
-                                <a href="#" class="btn btn-outline-success btn-sm">Gostei</a>
-                                <a href="#" class="btn btn-outline-danger btn-sm">Não Gostei</a>
+                                <a href="#" class="btn btn-outline-success btn-sm vote-btn" data-id="${media.id}" data-type="like">Gostei</a>
+                                <a href="#" class="btn btn-outline-danger btn-sm vote-btn" data-id="${media.id}" data-type="dislike">Não Gostei</a>
                             </div>
                         </div>
                     </div>
@@ -59,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Erro:', error);
             mediaContainer.innerHTML = '<p class="text-danger text-center">Não foi possível carregar as mídias.</p>';
+            showErrorToast('Não foi possível carregar as mídias da API.');
         }
     }
 
