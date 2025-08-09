@@ -2,11 +2,8 @@ import sqlite3
 
 DB_NAME = 'media.db'
 
-def connect_db():
-    return sqlite3.connect(DB_NAME)
-
-def create_tbs():
-    conn = connect_db()
+def create_tbs(conn: sqlite3.Connection):
+    """Cria a tabela de mídias usando uma conexão existente."""
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS medias (
@@ -20,16 +17,14 @@ def create_tbs():
         )
     """)
 
-    conn.commit()
-    conn.close()
-
-def populate_tbs():
-    conn = connect_db()
+def populate_tbs(conn: sqlite3.Connection):
+    """Popula a tabela de mídias se ela estiver vazia, usando uma conexão existente."""
     cursor = conn.cursor()
     cursor.execute("SELECT COUNT(*) FROM medias")
     count = cursor.fetchone()[0]
 
     if count == 0:
+        print("Banco de dados vazio. Populando com dados iniciais...")
         medias = [
             ("A Origem", "Sci-Fi", "Um ladrão que invade sonhos.", "https://placehold.co/150/png"),
             ("Interestelar", "Sci-Fi", "Viagem no tempo e espaço para salvar a humanidade.", "https://placehold.co/150/png"),
@@ -42,11 +37,27 @@ def populate_tbs():
             INSERT INTO medias (title, genre, description, image) 
             VALUES (?, ?, ?, ?)
         """, medias)
-        conn.commit()
-
-    conn.close()
+        print("Mídias inseridas com sucesso.")
+    else:
+        print("O banco de dados já contém dados. Nenhuma ação necessária.")
 
 if __name__ == '__main__':
-    create_tbs()
-    populate_tbs()
-    print("Banco criado e populado com sucesso.")
+    print(f"Iniciando configuração do banco de dados '{DB_NAME}'...")
+    conn = None # Inicializa a variável
+    try:
+        # Abre a conexão apenas uma vez
+        conn = sqlite3.connect(DB_NAME)
+        create_tbs(conn)
+        populate_tbs(conn)
+        conn.commit()
+        
+        print("\nConfiguração do banco de dados concluída com sucesso!")
+        
+    except sqlite3.Error as e:
+        print(f"Ocorreu um erro ao configurar o banco de dados: {e}")
+        
+    finally:
+        # Garante que a conexão seja fechada, não importa o que aconteça
+        if conn:
+            conn.close()
+            print("Conexão com o banco de dados fechada.")
