@@ -71,17 +71,17 @@ Abra http://localhost:8000
 ## 📁 Estrutura do projeto
 ```py
 projeto/
-├── static/                 # Arquivos estáticos (HTML, CSS, JS, imagens)
-│   ├── uploads/            # Upload de imagens
-│   │   ├── images/
-│   ├── index.html
-│   ├── style.css 
 ├── .venv/                  # Ambiente virtual (não versionado)
-├── main.py                 # Arquivo principal da API
-├── database.py             # Lógica de criação e conexão com o banco
-├── requirements.txt        # Dependências do projeto
+├── static/                 # Arquivos estáticos (HTML, CSS, JS)
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css 
 ├── .gitignore
-└── README.md
+├── database.py             # Lógica de criação e conexão com o banco
+├── main.py                 # Arquivo principal da API
+├── media.db                # Banco de dados (não versionado)
+├── README.md
+└── requirements.txt        # Dependências do projeto
 ```
 
 ---
