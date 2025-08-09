@@ -12,12 +12,18 @@ Este é um sistema simples desenvolvido como parte de um teste prático de está
 ---
 
 ## 💻 Tecnologias Utilizadas
-
+### Backend
 - **Python 3.12**
 - **FastAPI**
 - **Uvicorn**
 - **SQLite3**
-- **HTML / CSS / JavaScript (vanilla)**
+
+### Frontend
+- **HTML**
+- **CSS**
+- **JavaScript**
+- **Bootstrap 5 (CDN)**
+- **Bootstrap Icons (CDN)**
 
 ---
 
