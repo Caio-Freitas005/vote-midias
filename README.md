@@ -70,7 +70,14 @@ uvicorn main:app --reload
 ```
 
 ### 6. Acesse no navegador
-Abra http://localhost:8000
+
+Após iniciar o servidor, você pode acessar a duas URLs principais:
+
+- **Para ver a aplicação (Front-end):**
+  Abra o seu navegador em [http://localhost:8000/](http://localhost:8000/)
+
+- **Para ver a documentação da API (Back-end):**
+  Abra [http://localhost:8000/docs](http://localhost:8000/docs) para interagir diretamente com a API.
 
 ---
 
