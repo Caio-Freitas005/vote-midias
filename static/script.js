@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function handleVote(mediaId, voteType) {
         try {
-            const url = `http://localhost:8000/medias/${mediaId}/${voteType}`;
+            const url = `/medias/${mediaId}/${voteType}`;
 
             const options = {
                 method: 'POST',
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadMedias() {
         try {
-            const response = await fetch('http://localhost:8000/medias');
+            const response = await fetch('/medias');
             if (!response.ok) {
                 throw new Error ('Falha ao carregar os dados da API.')
             }
