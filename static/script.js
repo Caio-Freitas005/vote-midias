@@ -1,6 +1,46 @@
 // Espera o conteúdo da página ser totalmente carregado 
 document.addEventListener('DOMContentLoaded', () => {
 
+    const registerForm = document.getElementById('register-form');
+    const registerModalElement = document.getElementById('registerModal');
+    const registerModal = new bootstrap.Modal(registerModalElement);
+
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const mediaData = {
+            title: document.getElementById('media-tile').value,
+            genre: document.getElementById('media-genre').value,
+            description: document.getElementById('media-description').value,
+            image: document.getElementById('media-image').value
+        };
+
+        try {
+            const response = await fetch('/medias', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(mediaData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.detail || 'Falha ao cadastrar a mídia.');
+            }
+
+            registerModal.hide();
+            registerForm.reset(); // Limpa os campos do formulário
+            
+            await loadMedias(); 
+            await loadTotals();
+
+        } catch (error) {
+            console.error('Erro ao cadastrar:', error);
+            showErrorToast(error.message);
+        }
+    });
+
     const mediaContainer = document.getElementById('media-container');
 
     function showErrorToast(message) {
@@ -79,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 likesButton.innerHTML = `<i class="bi bi-hand-thumbs-up-fill"></i> ${updatedMedia.likes}`;
                 dislikesButton.innerHTML = `<i class="bi bi-hand-thumbs-down-fill"></i> ${updatedMedia.dislikes}`;
             }
-            
+
             loadTotals();
 
         } catch (error) {
