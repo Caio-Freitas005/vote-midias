@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sqlite3
@@ -60,6 +60,10 @@ def _update_vote(media_id: int, vote_type: str, conn: sqlite3.Connection):
 
     updated_media = cursor.execute("SELECT * FROM medias WHERE id = ?", (media_id,)).fetchone()
     return updated_media
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return Response(status_code=204)
 
 @app.get("/", response_class=FileResponse, include_in_schema=False)
 async def read_root():
