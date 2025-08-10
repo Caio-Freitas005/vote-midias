@@ -21,7 +21,7 @@ body {
 }
 
 footer {
-    background-color: #121015 !important; 
+    background-color: #121015; 
 }
 
 footer .btn-outline-light {
@@ -72,6 +72,20 @@ footer .btn-outline-light:hover {
 }
 
 #errorToast .toast-body {
+    color: #dfdcdc; 
+}
+
+#successToast {
+    background-color: #121015;
+    border: 1px solid #198754; 
+}
+
+#successToast .toast-header {
+    background-color: #23202a; 
+    color: #198754; 
+}
+
+#successToast .toast-body {
     color: #dfdcdc; 
 }
 
