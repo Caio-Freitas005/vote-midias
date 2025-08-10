@@ -1,5 +1,5 @@
 import sqlite3
-from schemas import MediaCreate
+from .schemas import MediaCreate
 
 def get_all(db: sqlite3.Connection):
     return db.execute('SELECT * FROM medias').fetchall()

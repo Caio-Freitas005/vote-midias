@@ -1,7 +1,7 @@
 import sqlite3
 from fastapi import HTTPException
-import repositories
-from schemas import MediaCreate
+from . import repositories
+from .schemas import MediaCreate
 
 def get_all_medias(db: sqlite3.Connection):
     return repositories.get_all(db)

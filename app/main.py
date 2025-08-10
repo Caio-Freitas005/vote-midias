@@ -3,9 +3,9 @@ from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import MediaCreate
-from database import get_db
-import services
+from .schemas import MediaCreate
+from .database import get_db
+from . import services
 
 DB_NAME = 'media.db'
 

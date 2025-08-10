@@ -66,7 +66,7 @@ python setup_database.py
 
 ### 5. Rode o servidor
 ```bash
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ### 6. Acesse no navegador
@@ -83,22 +83,22 @@ Após iniciar o servidor, você pode acessar a duas URLs principais:
 
 ## 📁 Estrutura do projeto
 ```py
-projeto/
-├── .venv/                  # Ambiente virtual (não versionado)
-├── static/                 # Arquivos de front-end (HTML, CSS, JS)
+vote-midias/
+├── app/                      # Pacote principal da aplicação API
+│   ├── __init__.py           # Inicializador do pacote Python
+│   ├── database.py           # Módulo de conexão com o banco (dependência)
+│   ├── main.py               # Camada de API (endpoints e configuração)
+│   ├── repositories.py       # Camada de acesso aos dados (queries SQL)
+│   ├── schemas.py            # Camada de validação de dados (Pydantic)
+│   └── services.py           # Camada de lógica de negócio
+├── static/                   # Pacote de front-end (ficheiros estáticos)
 │   ├── index.html
 │   ├── script.js
 │   └── style.css
 ├── .gitignore
-├── database.py             # Módulo de conexão com o banco de dados (dependência)
-├── main.py                 # Camada de API (endpoints)
-├── repositories.py         # Camada de acesso aos dados (queries SQL)
-├── schemas.py              # Camada de validação de dados (Pydantic)
-├── services.py             # Camada de lógica de negócio
-├── setup_database.py       # Script para criar e popular o banco de dados
-├── media.db                # Banco de dados (não versionado)
-├── README.md
-└── requirements.txt        # Dependências do projeto
+├── requirements.txt          # Dependências do projeto Python
+├── setup_database.py         # Script para criar e popular o banco de dados
+└── README.md                 # Documentação do projeto
 ```
 
 ---
