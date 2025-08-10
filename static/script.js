@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         const mediaData = {
-            title: document.getElementById('media-tile').value,
+            title: document.getElementById('media-title').value,
             genre: document.getElementById('media-genre').value,
             description: document.getElementById('media-description').value,
             image: document.getElementById('media-image').value
