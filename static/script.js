@@ -14,6 +14,28 @@ document.addEventListener('DOMContentLoaded', () => {
         errorToast.show();
     }
 
+    async function loadTotals() {
+        try {
+            const response = await fetch('/medias/totals');
+            if (!response.ok) {
+                console.error('Não foi possível carregar os totais.');
+                return;
+            }
+            const totals = await response.json();
+
+            const totalLikesElement = document.getElementById('total-likes');
+            const totalDislikesElement = document.getElementById('total-dislikes');
+
+            if (totalLikesElement && totalDislikesElement) {
+                totalLikesElement.textContent = totals.total_likes;
+                totalDislikesElement.textContent = totals.total_dislikes;
+            }
+
+        } catch (error) {
+            console.error('Erro ao carregar totais:', error);
+        }
+    }
+
     mediaContainer.addEventListener('click', (e) => {
         const clickedButton = e.target.closest('.vote-btn');
 
@@ -57,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 likesButton.innerHTML = `<i class="bi bi-hand-thumbs-up-fill"></i> ${updatedMedia.likes}`;
                 dislikesButton.innerHTML = `<i class="bi bi-hand-thumbs-down-fill"></i> ${updatedMedia.dislikes}`;
             }
+            
+            loadTotals();
 
         } catch (error) {
             console.error(`Erro ao votar: ${error}`);
@@ -123,4 +147,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadMedias();
+    loadTotals();
 });
