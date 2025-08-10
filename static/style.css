@@ -20,6 +20,30 @@ body {
     color: #dd5d07;
 }
 
+.card-like {
+    border: 1px solid #198754; 
+}
+
+.card-dislike {
+    border: 1px solid #dd5d07; 
+}
+
+.text-like {
+    color: #198754;
+}
+
+.text-dislike {
+    color: #dd5d07;
+}
+
+.btn-outline-danger {
+    border: 1px solid #dd5d07;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dd5d07;
+}
+
 footer {
     background-color: #121015; 
 }
@@ -41,24 +65,6 @@ footer .btn-outline-light:hover {
 
 .text-orange {
     color: #dd5d07;
-}
-
-.btn-orange {
-    background-color: #dd5d07;
-    color: #121015;
-}
-
- .btn-orange:hover {
-    background-color: #b34c07;
-    color: #121015;
-}
-
-.btn-gray {
-    background-color: #23202a;
-}
-
-.btn-gray:hover {
-    background-color: #1e1b24;
 }
 
 #errorToast {

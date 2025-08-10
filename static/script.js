@@ -177,10 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="card-text small">${media.description}</p>
                             <div class="mt-auto pt-3">
                                 <p class="mb-2">
-                                    <a id="likes-count-${media.id}" class="btn btn-outline-success vote-btn" data-id="${media.id}" data-type="like">
+                                    <a id="likes-count-${media.id}" class="btn text-like btn-outline-success vote-btn" data-id="${media.id}" data-type="like">
                                         <i class="bi bi-hand-thumbs-up-fill"></i> ${media.likes}
                                     </a>
-                                    <a id="dislikes-count-${media.id}" class="btn btn-outline-danger vote-btn ms-2" data-id="${media.id}" data-type="dislike">
+                                    <a id="dislikes-count-${media.id}" class="btn text-dislike btn-outline-danger vote-btn ms-2" data-id="${media.id}" data-type="dislike">
                                         <i class="bi bi-hand-thumbs-down-fill"></i> ${media.dislikes}
                                     </a>
                                 </p>
