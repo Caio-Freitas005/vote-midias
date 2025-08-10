@@ -1,0 +1,81 @@
+body {
+    background-color: #23202a;
+}
+
+.navbar {
+    background-color: #121015;
+    padding-top: 1rem;   
+    padding-bottom: 1rem;
+}
+
+.navbar-brand{
+    color: #dd5d07;
+}
+
+.navbar-brand:hover {
+    color: #dd5d07;
+}
+
+.nav-link:hover {
+    color: #dd5d07;
+}
+
+footer {
+    background-color: #121015 !important; 
+}
+
+footer .btn-outline-light {
+    border-color: #dd5d07 !important; 
+    color: #dd5d07 !important;
+}
+
+footer .btn-outline-light:hover {
+    background-color: #dd5d07 !important;
+    color: #121015 !important; 
+}
+
+.text-bg-dark {
+    background-color: #121015 !important;
+    color: #dfdcdc !important;
+}
+
+.text-orange {
+    color: #dd5d07;
+}
+
+.btn-orange {
+    background-color: #dd5d07;
+    color: #121015;
+}
+
+ .btn-orange:hover {
+    background-color: #b34c07;
+    color: #121015;
+}
+
+.btn-gray {
+    background-color: #23202a;
+}
+
+.btn-gray:hover {
+    background-color: #1e1b24;
+}
+
+#errorToast {
+    background-color: #121015;
+    border: 1px solid #dd5d07; 
+}
+
+#errorToast .toast-header {
+    background-color: #23202a; 
+    color: #dd5d07;
+}
+
+#errorToast .toast-body {
+    color: #dfdcdc; 
+}
+
+.form-control:focus {
+  border-color: #dd5d07;
+  box-shadow: 0 0 0 0.25rem rgba(221, 93, 7, 0.25);
+}
