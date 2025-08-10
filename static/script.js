@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mediaId = clickedButton.dataset.id;
         const voteType = clickedButton.dataset.type;
 
-        handleVote(mediaId, voteType)
+        handleVote(mediaId, voteType);
     });
 
     async function handleVote(mediaId, voteType) {
@@ -48,14 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const updatedMedia = await response.json();
 
-            // Atualiza os contadores na página
-            const likesCountSpan = document.getElementById(`likes-count-${mediaId}`);
-            const dislikesCountSpan = document.getElementById(`dislikes-count-${mediaId}`);
+            // Encontra os botões pelos seus IDs únicos
+            const likesButton = document.getElementById(`likes-count-${mediaId}`);
+            const dislikesButton = document.getElementById(`dislikes-count-${mediaId}`);
 
-            if (likesCountSpan && dislikesCountSpan) {
-                // Atualiza o HTML interno dos contadores com os novos valores
-                likesCountSpan.innerHTML = `<i class="bi bi-hand-thumbs-up-fill"></i> ${updatedMedia.likes}`;
-                dislikesCountSpan.innerHTML = `<i class="bi bi-hand-thumbs-down-fill"></i> ${updatedMedia.dislikes}`;
+            if (likesButton && dislikesButton) {
+                // Reconstrói o conteúdo de cada botão, mantendo o ícone
+                likesButton.innerHTML = `<i class="bi bi-hand-thumbs-up-fill"></i> ${updatedMedia.likes}`;
+                dislikesButton.innerHTML = `<i class="bi bi-hand-thumbs-down-fill"></i> ${updatedMedia.dislikes}`;
             }
 
         } catch (error) {
@@ -100,15 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="card-text small">${media.description}</p>
                             <div class="mt-auto pt-3">
                                 <p class="mb-2">
-                                    <span id="likes-count-${media.id}" class="badge text-bg-success fs-6">
+                                    <a id="likes-count-${media.id}" class="btn btn-outline-success vote-btn" data-id="${media.id}" data-type="like">
                                         <i class="bi bi-hand-thumbs-up-fill"></i> ${media.likes}
-                                    </span>
-                                    <span id="dislikes-count-${media.id}" class="badge text-bg-danger ms-2 fs-6">
+                                    </a>
+                                    <a id="dislikes-count-${media.id}" class="btn btn-outline-danger vote-btn ms-2" data-id="${media.id}" data-type="dislike">
                                         <i class="bi bi-hand-thumbs-down-fill"></i> ${media.dislikes}
-                                    </span>
+                                    </a>
                                 </p>
-                                <a href="#" class="btn btn-outline-success btn-sm vote-btn" data-id="${media.id}" data-type="like">Gostei</a>
-                                <a href="#" class="btn btn-outline-danger btn-sm vote-btn" data-id="${media.id}" data-type="dislike">Não Gostei</a>
                             </div>
                         </div>
                     </div>
