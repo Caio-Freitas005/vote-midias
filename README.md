@@ -60,7 +60,7 @@ pip install -r requirements.txt
 
 ### 4. Inicialize o banco de dados
 ```bash
-python database.py
+python setup_database.py
 ```
 > Isso criará o banco SQLite e irá populá-lo com 5 filmes/séries iniciais.
 
@@ -85,13 +85,17 @@ Após iniciar o servidor, você pode acessar a duas URLs principais:
 ```py
 projeto/
 ├── .venv/                  # Ambiente virtual (não versionado)
-├── static/                 # Arquivos estáticos (HTML, CSS, JS)
+├── static/                 # Arquivos de front-end (HTML, CSS, JS)
 │   ├── index.html
 │   ├── script.js
-│   ├── style.css 
+│   └── style.css
 ├── .gitignore
-├── database.py             # Lógica de criação e conexão com o banco
-├── main.py                 # Arquivo principal da API
+├── database.py             # Módulo de conexão com o banco de dados (dependência)
+├── main.py                 # Camada de API (endpoints)
+├── repositories.py         # Camada de acesso aos dados (queries SQL)
+├── schemas.py              # Camada de validação de dados (Pydantic)
+├── services.py             # Camada de lógica de negócio
+├── setup_database.py       # Script para criar e popular o banco de dados
 ├── media.db                # Banco de dados (não versionado)
 ├── README.md
 └── requirements.txt        # Dependências do projeto
