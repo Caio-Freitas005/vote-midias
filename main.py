@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import sqlite3
@@ -14,6 +16,9 @@ app.add_middleware(
     allow_methods=["*"], 
     allow_headers=["*"], 
 )
+
+# Monta o diretório para servir os arquivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 def get_db():
     """Cria e fornece uma conexão com o banco, garantindo que ela seja fechada no final."""
@@ -55,6 +60,10 @@ def _update_vote(media_id: int, vote_type: str, conn: sqlite3.Connection):
 
     updated_media = cursor.execute("SELECT * FROM medias WHERE id = ?", (media_id,)).fetchone()
     return updated_media
+
+@app.get("/", response_class=FileResponse, include_in_schema=False)
+async def read_root():
+    return "static/index.html"
 
 @app.get("/medias")
 def get_medias(conn: sqlite3.Connection = Depends(get_db)):
