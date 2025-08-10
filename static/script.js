@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             registerModal.hide();
             registerForm.reset(); // Limpa os campos do formulário
+
+            showSuccessToast('Mídia cadastrada com sucesso!');
             
             await loadMedias(); 
             await loadTotals();
@@ -52,6 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
         errorToastBody.textContent = message;
 
         errorToast.show();
+    }
+
+    function showSuccessToast(message) {
+        const successToastElement = document.getElementById('successToast');
+        const successToastBody = document.getElementById('successToastBody');
+        
+        const successToast = new bootstrap.Toast(successToastElement);
+        
+        successToastBody.textContent = message;
+        
+        successToast.show();
     }
 
     async function loadTotals() {
