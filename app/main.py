@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import Response, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from .schemas import MediaCreate
+from .schemas import MediaCreate, MediaUpdate
 from .database import get_db
 from . import services
 
@@ -30,6 +30,17 @@ async def favicon():
 async def read_root():
     return 'static/index.html'
 
+@app.get('/medias/totals')
+def get_totals(db: sqlite3.Connection = Depends(get_db)):
+    """Exibe os totais de votos positivos e negativos."""
+    totals = services.get_all_totals(db)
+    return {'total_likes': totals['total_likes'] or 0, 'total_dislikes': totals['total_dislikes'] or 0}
+
+@app.get('/medias/{media_id}')
+def get_media_by_id(media_id: int, db: sqlite3.Connection = Depends(get_db)):
+    """Busca uma única mídia pelo seu ID."""
+    return services.get_media_by_id(db, media_id)
+
 @app.get('/medias')
 def get_medias(db: sqlite3.Connection = Depends(get_db)):
     """Lista todas as mídias com os votos atuais."""
@@ -50,8 +61,12 @@ def dislike_media(media_id: int, db: sqlite3.Connection = Depends(get_db)):
     """Registra um voto negativo para uma mídia."""
     return services.update_vote(media_id, 'dislike', db)
 
-@app.get('/medias/totals')
-def get_totals(db: sqlite3.Connection = Depends(get_db)):
-    """Exibe os totais de votos positivos e negativos."""
-    totals = services.get_all_totals(db)
-    return {'total_likes': totals['total_likes'] or 0, 'total_dislikes': totals['total_dislikes'] or 0}
+@app.put('/medias/{media_id}')
+def update_media(media_id: int, media: MediaUpdate, db: sqlite3.Connection = Depends(get_db)):
+    """Atualiza os dados de uma mídia existente."""
+    return services.update_media(media_id, media, db)
+
+@app.delete('/medias/{media_id}')
+def delete_media(media_id: int, db: sqlite3.Connection = Depends(get_db)):
+    """Apaga uma mídia do banco de dados."""
+    return services.delete_media(media_id, db)

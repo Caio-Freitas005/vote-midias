@@ -24,6 +24,7 @@ Este é um sistema simples desenvolvido como parte de um teste prático de está
 - **JavaScript**
 - **Bootstrap 5 (CDN)**
 - **Bootstrap Icons (CDN)**
+- **DOMPurify (CDN)**
 
 ---
 
@@ -100,6 +101,23 @@ vote-midias/
 ├── setup_database.py         # Script para criar e popular o banco de dados
 └── README.md                 # Documentação do projeto
 ```
+
+---
+
+## 📈 Evoluções Futuras
+
+Embora o projeto atual cumpra todos os requisitos do desafio, a arquitetura foi desenhada para permitir um crescimento futuro. Os próximos passos lógicos para transformar o sistema num produto mais completo seriam:
+
+- **Implementação de Autenticação de Usuários:**
+  - Criar um sistema de cadastro e login com senhas encriptadas (hashing).
+  - Gerar tokens JWT (JSON Web Tokens) na autenticação para proteger os endpoints da API.
+
+- **Votos por Usuário:**
+  - Adequar os votos para funcionarem por ID de usuário autenticado.
+  - Isto permitiria que cada usuário pudesse alterar o seu próprio voto (de "like" para "dislike", por exemplo) e impediria votos infinitos.
+
+- **Otimização de Carregamento no Front-end:**
+  - Após o cadastro ou edição de uma mídia, em vez de recarregar toda a lista, o front-end poderia adicionar ou atualizar dinamicamente apenas o card relevante para uma melhor experiência de usuário.
 
 ---
 

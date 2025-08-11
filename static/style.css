@@ -104,6 +104,11 @@ footer .btn-outline-light:active {
     color: #dd5d07;
 }
 
+.badge-genre {
+    background-color: #dd5d07 !important;
+    color: #121015 !important;
+}
+
 #errorToast {
     background-color: #121015;
     border: 1px solid #dd5d07; 
